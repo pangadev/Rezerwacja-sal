@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <form action="/search" method="GET">
+    {% csrf_token %}
+    <ul class="form-style-1">
+    <h1>Search</h1>
+
+        <li><label>Room name <span class="required">*</span></label>
+            <select name="room_name" class="field-select">
+                <option value="" selected hidden>Select room</option>
+{#                <option value="" selected hidden></option>#}
+
+                {% for room in all_rooms %}
+                <option value="{{ room.name }}">{{ room.name }}</option>
+                {% endfor %}
+            </select>
+        <li><label>Room capacity <span class="required">*</span></label><input type="number" name="room_capacity" class="field-long" placeholder="Desired capacity"></li>
+        <li><label>Date <span class="required">*</span></label><input type="date" name="reservation_date" class="field-divided"></li>
+        <li><label>Projector? <span class="required">*</span></label>
+        <select name="projector" class="field-select, field-divided">
+            <option value="" selected hidden>Select option</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+            </select>
+        <li>
+            <input type="submit">
+        </li>
+    </ul>
+    </form>
+{% for room in rooms %}
+<p>{{ room.name }}</p>
+{% endfor %}
+<ul class="list-group">
+<h1>All rooms</h1>
+    <li class="list-group-item"> <a href="/room/new"> <img src="{% static "icons/edit.svg" %}" alt="My image" width="20px"> Add a new room </a></li>
+{% for room in all_rooms %}
+    <li class="list-group-item">
+{#        <div class="dropdown">#}
+{#            <a href="room/{{ room.id }}"><img src="{% static "icons/more.svg" %}" alt="My image" width="20px"></a>#}
+{#                <div class="dropdown-content">#}
+{#                     <a href="room/modify/{{ room.id }}"><img src="{% static "icons/edit.svg" %}" alt="My image" width="20px">Edit</a>#}
+{#                </div>#}
+{#        </div>#}
+        <a href="room/delete/{{ room.id }}"><img src="{% static "icons/delete.svg" %}" alt="Remove room" width="20px"></a>
+        <a href="room/modify/{{ room.id }}"><img src="{% static "icons/edit.svg" %}" alt="Modify room" width="20px"></a>
+        <a href="room/{{ room.id }}"><img src="{% static "icons/more.svg" %}" alt="Room details" width="20px"></a>
+        {{ room.name }}
+    </li>
+{% endfor %}
+{% endblock %}

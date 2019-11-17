@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block room_details %}
+<h1>{{Room_name}} details</h1>
+<p>Room capacity: {{ Room_capacity }}</p>
+<p>Projector avaliable? {{ Is_projector }}</p>
+<p>Upcoming reservations:  {{ Reservations }}</p>
+<p>Room reservation</p>
+
+<form action="/reservation/{{ Room_id }} " method="POST">
+    {% csrf_token %}
+    <p><label>Reservation date: <input type="date" name="reservation"></label></p>
+    <p><label>
+        <input type="submit">
+    </label></p>
+</form>
+{% endblock %}

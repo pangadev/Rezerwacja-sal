@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block details %}
+<form action="#" method="POST">
+
+    <h1 style="text-align: center">{{ Room_name }}</h1>
+    <h1 style="text-align: center">{{ Response }}</h1>
+    <h1 style="text-align: center"> {{ room_message }}</h1>
+
+    {% csrf_token %}
+        <ul class="form-style-1">
+        <li><label>Room name <span class="required">*</span></label><input type="text" name="room_name" class="field-long"></li>
+        <li><label>Room capacity <span class="required">*</span></label><input type="number" name="room_capacity" class="field-long"></li>
+        <li><label>Projector? <span class="required">*</span></label>
+        <select id="projector" class="field-select, field-divided ">
+            <option value="none" selected disabled hidden>Select option</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+            </select>
+        <li>
+            <input type="submit" value="Submit" />
+        </li>
+    </ul>
+    </form>
+{#{% if room_message %}#}
+{#<h2 style="text-align: center"> {{ room_message }}</h2>#}
+{#{% endif %}#}
+{% endblock %}

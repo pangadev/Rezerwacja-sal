@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Strona | {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    </head>
+<body>
+<ul class="ul-navbar">
+  <li class="li-navbar col-lg-12"><a class="active, a-navbar" href="/">Start</a></li>
+{#  <li class="li-navbar col-lg-3"><a href="#news" class="a-navbar">News</a></li>#}
+{#  <li class="li-navbar col-lg-3"><a href="#contact" class="a-navbar">Contact</a></li>#}
+{#  <li class="li-navbar col-lg-3"><a href="#about" class="a-navbar">About</a></li>#}
+</ul>
+
+​{% block content %}
+{% endblock %}
+
+​{% block results %}
+{% endblock %}
+
+​{% block details %}
+{% endblock %}
+
+{% block room_details %}
+{% endblock %}
+
+{% block info %}
+{% endblock %}
+
+
+</body>
+</html>
