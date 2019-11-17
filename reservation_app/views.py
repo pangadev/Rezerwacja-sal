@@ -63,13 +63,14 @@ def delete_room(request, id):
     room.delete()
     # return HttpResponse(response)
     return render(request, 'info.html', {"response": response, "response2": "Deletion successful!"})
+
 def get_room_details(request, id):
     room = Room.objects.get(id=id)
     today = date.today()
-    reservations = Reservation.objects.filter(room_id=id).filter(date__gte=today)
-    response = ""
+    reservations = Reservation.objects.filter(room_id=id).filter(date__gte=today).order_by('date')
+    response = []
     for reservation in reservations:
-        response += f"{reservation.date}, "
+        response.append(reservation.date)
 
     room_dict = {"Room_name": room.name,
                  "Room_capacity": room.capacity,
@@ -141,6 +142,7 @@ def create_reservation(request, id):
         room = Room.objects.get(id=id)
         date_list = Reservation.objects.filter(date=reservation_date, room_id=room)
         if len(date_list) == 1:
+            
             return HttpResponse("Reservation already exists")
         else:
             reservation = Reservation.objects.create(date=reservation_date, room_id=room)

@@ -1,17 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block room_details %}
-<h1>{{Room_name}} details</h1>
-<p>Room capacity: {{ Room_capacity }}</p>
-<p>Projector avaliable? {{ Is_projector }}</p>
-<p>Upcoming reservations:  {{ Reservations }}</p>
-<p>Room reservation</p>
 
-<form action="/reservation/{{ Room_id }} " method="POST">
+    <h1 style="text-align: center">{{ Room_name }} details</h1>
+        <ul class="form-style-1">
+        <li style="font-size: 125%"><p>Room capacity: {{ Room_capacity }}</li>
+        <li style="font-size: 125%"><p>Projector avaliable? {% if Is_projector == False %}
+    No</p>
+    {% else %}
+    Yes</p>
+    {% endif %}</li>
+        <li style="font-size: 125%"><p>Upcoming reservations</p>
+        <select id="projector" class="field-select, field-divided ">
+            {% for res in Reservations %}
+            <option value="none">{{res}}</option>
+            {% endfor %}
+            </select>
+
+    </ul>
+    <form action="/reservation/{{ Room_id }} " method="POST">
     {% csrf_token %}
-    <p><label>Reservation date: <input type="date" name="reservation"></label></p>
-    <p><label>
-        <input type="submit">
+    <ul class="form-style-1">
+
+        <li style="font-size: 125%">Create reservation</li>
+        <li style="font-size: 125%"><input type="date" name="reservation"></li>
+        <li style="font-size: 125%"><input type="submit"></li>
     </label></p>
+    </ul>
 </form>
+
 {% endblock %}
