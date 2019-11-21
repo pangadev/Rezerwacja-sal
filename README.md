@@ -1,6 +1,6 @@
 # workshop
 **Prosta aplikacja do rezerwacji sal**
 
-**Technologie**
+**Technologie**<br>
 HTML, CSS, Python + Django
 
