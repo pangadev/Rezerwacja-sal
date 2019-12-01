@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from reservation_app.models import Room, Reservation
 from django.http import HttpResponse, request, HttpResponseRedirect
 from datetime import date, datetime
+from django.core.exceptions import ObjectDoesNotExist
+
 
 # Create your views here.
 
@@ -98,11 +100,11 @@ def search_rooms(request):
             is_projector = True
         else:
             is_projector = False
-        room = Room.objects.get(name=f"{room_name}", capacity=room_capacity, is_projector=is_projector)
-        if room:
+        try:
+            room = Room.objects.get(name=f"{room_name}", capacity=room_capacity, is_projector=is_projector)
             room_id = room.id
             return HttpResponseRedirect(f'/room/{room_id}')
-        else:
+        except Room.DoesNotExist:
             return HttpResponse("Brak takiego pomieszczenia")
 
     if request.GET.get('room_name') == "" and request.GET.get('room_capacity') != "" \
