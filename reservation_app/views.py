@@ -98,9 +98,13 @@ def search_rooms(request):
             is_projector = True
         else:
             is_projector = False
+        # room = get_object_or_404(Room, name=f"{room_name}", capacity=room_capacity, is_projector=is_projector)
         room = Room.objects.get(name=f"{room_name}", capacity=room_capacity, is_projector=is_projector)
-        room_id = room.id
-        return HttpResponseRedirect(f'/room/{room_id}')
+        if room:
+            room_id = room.id
+            return HttpResponseRedirect(f'/room/{room_id}')
+        else:
+            return HttpResponse("Brak takiego pomieszczenia")
 
     if request.GET.get('room_name') == "" and request.GET.get('room_capacity') != "" \
             and request.GET.get('reservation_date') != "":
@@ -142,7 +146,7 @@ def create_reservation(request, id):
         room = Room.objects.get(id=id)
         date_list = Reservation.objects.filter(date=reservation_date, room_id=room)
         if len(date_list) == 1:
-            
+
             return HttpResponse("Reservation already exists")
         else:
             reservation = Reservation.objects.create(date=reservation_date, room_id=room)
