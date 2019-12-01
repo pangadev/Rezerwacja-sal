@@ -98,7 +98,6 @@ def search_rooms(request):
             is_projector = True
         else:
             is_projector = False
-        # room = get_object_or_404(Room, name=f"{room_name}", capacity=room_capacity, is_projector=is_projector)
         room = Room.objects.get(name=f"{room_name}", capacity=room_capacity, is_projector=is_projector)
         if room:
             room_id = room.id
