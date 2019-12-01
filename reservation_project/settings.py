@@ -25,7 +25,10 @@ SECRET_KEY = 'l(ji)wu7otzs@53wdcwz&q+0$#gj&2!@z15f2z_ivzjlcw9zs3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+'rezerwacjasal.panga.usermd.net',
+'rezerwacjasal.panga.usermd.net',
+]
 
 
 # Application definition
@@ -79,11 +82,11 @@ WSGI_APPLICATION = 'reservation_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'HOST': '127.0.0.1',
-        'NAME': 'workshop3',
+        'HOST': 'pgsql42.mydevil.net',
+        'NAME': 'p1153_rezerwacja',
         'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',         # pamiętaj o poprawnym skonfigurowaniu
-        'PASSWORD': 'coderslab',    # bazy danych!
+        'USER': 'p1153_rezerwacja',         # pamiętaj o poprawnym skonfigurowaniu
+        'PASSWORD': 'RezerwacjaSal1!',    # bazy danych!
     }
 }
 
@@ -125,3 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+ENV_PATH = os.path.abspath(os.path.dirname(__file__))
+STATIC_ROOT = os.path.join(ENV_PATH, '../public/static/') 
+MEDIA_ROOT = os.path.join(ENV_PATH, '../public/media/') 
+#
